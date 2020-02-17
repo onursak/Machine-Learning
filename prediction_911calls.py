@@ -36,21 +36,21 @@ def reduceClassCount(data):
 def dropDuplicateValues(data):
     data.drop_duplicates()
     
-#this function encode the class names to numbers
+#this function encodes the class names to numbers
 def encodeLabels(data):
     labelencoder = LabelEncoder()
     data["Label"] = labelencoder.fit_transform(data["Label"])
 
-#this function scale the latitude and longtitude features
+#this function scales the latitude and longtitude features
 def scaleFeatures(data):
     scaler = MinMaxScaler(feature_range=(0, 1))
     data[["Lat","Long"]] = scaler.fit_transform(data[["Lat","Long"]])
 
-#this function return the count of class type
+#this function returns the count of class type
 def getClassNames(df):
     return df.Label.unique()
 
-#this function return the counts of each class type in the data
+#this function returns the counts of each class type in the data
 def getCountOfType(df):
     priors = []
     classNames = getClassNames(df)
@@ -58,7 +58,7 @@ def getCountOfType(df):
         priors.append([i,len(df[df.Label == i])])
     return priors
 
-#this function features and labels return as numpy array 
+#this function returns features and labels as numpy array 
 def getDataAsArray(data):
     features = data[["Lat","Long"]].values
     labels = data["Label"].values
